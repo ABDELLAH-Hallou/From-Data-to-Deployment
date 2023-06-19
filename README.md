@@ -7,13 +7,13 @@ Welcome to the Deep Learning Project Starter Guide! This tutorial serves as a co
 
 In this tutorial, you will learn the essential steps involved in creating and deploying a deep learning model in a mobile app. We will cover the following topics:
 
-1. Collecting and preparing the data: We'll explore various methods for data collection, preprocessing, and augmentation to ensure a robust and reliable dataset for training.
+1. Preparing the data: We'll explore various methods for data preprocessing to ensure a robust and reliable dataset for training.
 
-2. Model creation: You'll discover different deep learning architectures and techniques to design and build your model. We'll walk you through the process of choosing the right model architecture for your project.
+2. Model creation: You'll discover how to design and build your CNN model.
 
-3. Training the model: We'll delve into the process of training your deep learning model using popular frameworks like TensorFlow or PyTorch. You'll learn about optimization, hyperparameter tuning, and monitoring training progress.
+3. Training the model: We'll delve into the process of training your deep learning model using TensorFlow.
 
-4. Deployment in a mobile app: Once your model is trained, we'll guide you through the steps to integrate it into a mobile app using frameworks like TensorFlow Lite or Core ML. You'll understand how to make predictions on the go!
+4. Deployment in a mobile app: Once your model is trained, we'll guide you through the steps to integrate it into a mobile app using TensorFlow Lite. You'll understand how to make predictions on the go!
 
 ## Who should follow this tutorial
 
@@ -32,7 +32,7 @@ Your feedback is valuable and can help improve this tutorial for other users as 
 
 To get started, make sure you have the required dependencies and libraries installed. The tutorial is divided into easy-to-follow sections, each covering a specific aspect of the deep learning project workflow. Feel free to jump to the sections that interest you the most or follow along from beginning to end.
 
-Are you ready? Let's embark on this exciting journey into the world of deep learning!
+Are you ready?
 
 ## Imports and loading the dataset
 
