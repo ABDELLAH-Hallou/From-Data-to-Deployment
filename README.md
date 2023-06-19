@@ -284,7 +284,7 @@ To assess the performance of the trained model, we evaluate it on the test data.
 ```python
 plot_model_evaluation(model,history)
 ```
-![image](https://github.com/ABDELLAH-Hallou/From_Data-to-Deployment/blob/master/evaluate.png?raw=true)
+![image](https://github.com/ABDELLAH-Hallou/From-Data-to-Deployment/blob/master/assets/evaluate.png)
 ```python
 # Evaluate the model on test data
 test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=0)
@@ -325,7 +325,7 @@ for i, index in enumerate(random_indices):
 
 plt.show()
 ```
-![image]()
+![image](https://github.com/ABDELLAH-Hallou/From-Data-to-Deployment/blob/master/assets/pred.png)
 
 for more information about the model, check these ressources : 
 1. https://www.tensorflow.org/tutorials/keras/classification
