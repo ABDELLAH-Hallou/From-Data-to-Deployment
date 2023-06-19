@@ -297,7 +297,196 @@ for more information about the model, check these ressources :
 ## Deployment
 ### Create a new flutter project
 Before creating new flutter project, make sure that the Flutter SDK and other Flutter app development-related requirements are properly installed: https://docs.flutter.dev/get-started/install/windows
-To create a new flutter project run the following command:
-```shell
-flutter create fashionMnist
+
+After the project has been set up, we will implement the UI to allow users to take pictures or upload images from the gallery and perform object recognition using a the exported TensorFlow Lite model.
+First, we need to install these packages:
+1. camera: **0.10.4**
+2. image_picker:
+3. tflite: **^1.1.2** 
+to do so copy the following code snippet and paste it into the **pubspec.yaml** file of the project:
+```yaml
+dependencies:
+  camera: 0.10.4
+  image_picker:
+  tflite: ^1.1.2
+```
+In main.dart file, we will have the MyHomePage stateful widget class. In this class object, we need to initialize a constant to store the image file once fetched and loading value. Here, we are going to do that using the _imageFile File type variable & _loading bool type variable:
+```flutter
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tflite/tflite.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
+
+  runApp(MyApp(firstCamera));
+}
+
+class MyApp extends StatelessWidget {
+  final CameraDescription camera;
+
+  const MyApp(this.camera);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Camera App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: CameraScreen(camera),
+    );
+  }
+}
+
+class CameraScreen extends StatefulWidget {
+  CameraScreen(CameraDescription camera);
+
+  @override
+  _CameraScreenState createState() => _CameraScreenState();
+}
+
+class _CameraScreenState extends State<CameraScreen> {
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture = Future.value();
+
+  @override
+  void initState() {
+    super.initState();
+    _initCameraController();
+    _initTensorFlow();
+  }
+  Future<void> _initCameraController() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+    _controller = CameraController(
+      firstCamera,
+      ResolutionPreset.medium,
+    );
+    _initializeControllerFuture = _controller.initialize();
+    setState(() {});
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _takePicture() async {
+    try {
+      await _initializeControllerFuture;
+      final image = await _controller.takePicture();
+      await _processImage(image.path);
+    } catch (e) {
+      print('Error capturing image: $e');
+    }
+  }
+
+  Future<void> _pickImage() async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage = await imagePicker.getImage(
+          source: ImageSource.gallery);
+      if (pickedImage != null) {
+        await _processImage(pickedImage.path);
+      }
+    }catch(e){
+      print('Error picking image: $e');
+    }
+  }
+
+  Future<void> _processImage(String imagePath) async {
+    final String label = await _objectRecongnition(imagePath);
+    showDialog(
+      context: context,
+      barrierDismissible: false, dialog
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(label),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog
+                  },
+                  child: Text('Cancel'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Camera App'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: FutureBuilder<void>(
+                future: _initializeControllerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return CameraPreview(_controller);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              )
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton.icon(
+                onPressed: _takePicture,
+                icon: Icon(Icons.camera_alt),
+                label: Text('Take Picture'),
+              ),
+              ElevatedButton.icon(
+                onPressed: _pickImage,
+                icon: Icon(Icons.photo_library),
+                label: Text('Upload from Gallery'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+  Future<void> _initTensorFlow() async{
+    String? res = await Tflite.loadModel(
+        model: "assets/model/model.tflite",
+        labels: "assets/model/labels.txt",
+        numThreads: 1,
+        isAsset: true,
+        useGpuDelegate: false
+    );
+  }
+  Future<String> _objectRecongnition(String filepath) async{
+    var recognitions = await Tflite.runModelOnImage(
+        path: filepath,
+        numResults: 10,
+        threshold: 0.1,
+        asynch: true
+    );
+    return recognitions![0]["label"].toString();
+  }
+}
 ```
