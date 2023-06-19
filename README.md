@@ -694,3 +694,5 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 }
 ```
+![image](https://github.com/ABDELLAH-Hallou/From-Data-to-Deployment/blob/master/assets/camera.png)
+![image](https://github.com/ABDELLAH-Hallou/From-Data-to-Deployment/blob/master/assets/result.png)
