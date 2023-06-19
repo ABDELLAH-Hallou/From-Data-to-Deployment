@@ -311,7 +311,7 @@ dependencies:
   tflite: ^1.1.2
 ```
 In main.dart file, we will have the MyHomePage stateful widget class. In this class object, we need to initialize a constant to store the image file once fetched and loading value. Here, we are going to do that using the _imageFile File type variable & _loading bool type variable:
-```flutter
+```dart
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
