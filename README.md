@@ -540,7 +540,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Camera App',
+      title: 'Fashion Mnist',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -637,7 +637,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Camera App'),
+        title: Text('Fashion Mnist'),
       ),
       body: Column(
         children: <Widget>[
