@@ -6,6 +6,7 @@ Welcome to the Deep Learning Project Starter Guide! This tutorial serves as a co
 
 * [What you'll learn](#what-you-will-learn)
 * [Who should follow this tutorial](#who-should-follow-this-tutorial)
+* [Need help or have questions?](#need-help-or-have-questions)
 
 ## What you will learn
 
