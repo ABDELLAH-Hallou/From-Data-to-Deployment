@@ -4,9 +4,10 @@
 
 Welcome to the Deep Learning Project Starter Guide! This tutorial serves as a comprehensive resource for anyone looking to dive into the exciting world of deep learning. Whether you're a beginner or an experienced developer, this guide will take you through the process of building a deep learning project from start to finish.
 
-* [What you'll learn](#what-you-ll-learn)
+* [What you'll learn](#what-youll-learn)
 * [Who should follow this tutorial](#who-should-follow-this-tutorial)
 * [Need help or have questions?](#need-help-or-have-questions)
+* [Let's get started!](#lets-get-started)
 
 ## What you'll learn
 
