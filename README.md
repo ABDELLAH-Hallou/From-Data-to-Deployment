@@ -1,6 +1,6 @@
 
 # DataWhisper: Mastering DL Project Lifecycle
-*Authors: Abdellah Hallou ([LinkedIn](https://www.linkedin.com/in/abdellah-hallou/), [Twitter](https://twitter.com/HllAbdo))*
+*Author: Abdellah Hallou ([LinkedIn](https://www.linkedin.com/in/abdellah-hallou/), [Twitter](https://twitter.com/HllAbdo))*
 
 Welcome to the Deep Learning Project Starter Guide! This tutorial serves as a comprehensive resource for anyone looking to dive into the exciting world of deep learning. Whether you're a beginner or an experienced developer, this guide will take you through the process of building a deep learning project from start to finish.
 
