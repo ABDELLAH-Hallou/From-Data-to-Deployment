@@ -8,6 +8,23 @@ Welcome to the Deep Learning Project Starter Guide! This tutorial serves as a co
 * [Who should follow this tutorial](#who-should-follow-this-tutorial)
 * [Need help or have questions?](#need-help-or-have-questions)
 * [Let's get started!](#lets-get-started)
+* [Imports and loading the dataset](#imports-and-loading-the-dataset)
+* [Dataset Structure](#dataset-structure)
+* [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
+* [Preprocess the data](#preprocess-the-data)
+* [Build the model](#build-the-model)
+* [Evaluate accuracy](#evaluate-accuracy)
+* [Save and Export the Model](#save-and-export-the-model)
+* [Make predictions](#make-predictions)
+* [Deployment](#deployment)
+    * [Create a new flutter project](#create-a-new-flutter-project)
+    * [Configuring the Camera](#configuring-the-camera)
+    * [Creating the Camera Screen](#creating-the-camera-screen)
+    * [Integrating Image Upload](#integrating-image-upload)
+    * [Object Recognition with TensorFlow Lite](#object-recognition-with-tensorflow-lite)
+    * [Running the Model on Images](#running-the-model-on-Images)
+    * [Displaying Results in a Dialog](#displaying-results-in-a-dialog)
+    * [Building the User Interface](#building-the-user-interface)
 
 ## What you'll learn
 
@@ -333,15 +350,15 @@ plt.show()
 ```
 ![image](https://github.com/ABDELLAH-Hallou/From-Data-to-Deployment/blob/master/assets/pred.png)
 
-for more information about the model, check these ressources : 
+for more information about the model, check these resources: 
 1. https://www.tensorflow.org/tutorials/keras/classification
 2. https://github.com/cmasch/zalando-fashion-mnist/tree/master
 
 ## Deployment
-### Create a new flutter project
-Before creating new flutter project, make sure that the Flutter SDK and other Flutter app development-related requirements are properly installed: https://docs.flutter.dev/get-started/install/windows
+### Create a new Flutter project
+Before creating new Flutter project, make sure that the Flutter SDK and other Flutter app development-related requirements are properly installed: https://docs.flutter.dev/get-started/install/windows
 
-After the project has been set up, we will implement the UI to allow users to take pictures or upload images from the gallery and perform object recognition using a the exported TensorFlow Lite model.
+After the project has been set up, we will implement the UI to allow users to take pictures or upload images from the gallery and perform object recognition using the exported TensorFlow Lite model.
 First, we need to install these packages:
 1. camera: **0.10.4**
 2. image_picker:
@@ -362,7 +379,7 @@ import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 ```
-#### Configuring the Camera
+### Configuring the Camera
 To enable camera functionality, we'll utilize the **camera** package. First, import the necessary packages and instantiate the camera controller. Use the **availableCameras()** function to get a list of available cameras. In this tutorial, we'll use the first camera in the list.
 ```dart
 void main() async {
@@ -372,8 +389,8 @@ void main() async {
   runApp(MyApp(firstCamera));
 }
 ```
-#### Creating the Camera Screen
-Create a new StatefulWidget called **CameraScreen** that will handle the camera preview and image capture functionality. In the **initState()** method, initialize the camera controller and set the resolution preset. Additionally, implement the **_takePicture()** method, which captures an image using the camera controller.
+### Creating the Camera Screen
+Create a new **StatefulWidget** called **CameraScreen** that will handle the camera preview and image capture functionality. In the **initState()** method, initialize the camera controller and set the resolution preset. Additionally, implement the **_takePicture()** method, which captures an image using the camera controller.
 ```dart
 // main.dart
 class CameraScreen extends StatefulWidget {
@@ -418,7 +435,7 @@ class _CameraScreenState extends State<CameraScreen> {
 }
 
 ```
-#### Integrating Image Upload
+### Integrating Image Upload
 To allow users to upload images from the gallery, import the &**image_picker** package. Implement the **_pickImage()** method, which utilizes the **ImagePicker** class to select an image from the gallery. Once an image is selected, it can be processed using the **_processImage()** method.
 ```dart
 // main.dart
@@ -441,7 +458,7 @@ class _CameraScreenState extends State<CameraScreen> {
   // ...
 }
 ```
-#### Object Recognition with TensorFlow Lite
+### Object Recognition with TensorFlow Lite
 To perform object recognition, we'll use the TensorFlow Lite framework. Begin by importing the **tflite** package. In the **_initTensorFlow()** method, load the TensorFlow Lite model and labels from the assets. You can specify the model and label file paths and adjust settings like the number of threads and GPU delegate usage.
 ```dart
 // main.dart
@@ -469,7 +486,7 @@ class _CameraScreenState extends State<CameraScreen> {
 }
 
 ```
-#### Running the Model on Images
+### Running the Model on Images
 Implement the **_objectRecognition()** method, which takes an image file path as input and runs the TensorFlow Lite model on the image. The method returns the label of the recognized object.
 ```dart
 // main.dart
@@ -489,7 +506,7 @@ class _CameraScreenState extends State<CameraScreen> {
   // ...
 }
 ```
-#### Displaying Results in a Dialog
+### Displaying Results in a Dialog
 When an image is processed, display the result in a dialog box using the **showDialog()** method. Customize the dialog to show the recognized object label and provide an option to cancel.
 ```dart
 // main.dart
@@ -526,7 +543,7 @@ Future<void> _processImage(String imagePath) async {
 }
 
 ```
-#### Building the User Interface
+### Building the User Interface
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
