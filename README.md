@@ -364,8 +364,9 @@ After the project has been set up, we will implement the UI to allow users to ta
 First, we need to install these packages:
 1. camera: **0.10.4**
 2. image_picker:
-3. tflite: **^1.1.2** 
-to do so copy the following code snippet and paste it into the **pubspec.yaml** file of the project:
+3. tflite: **^1.1.2**
+
+To do so copy the following code snippet and paste it into the **pubspec.yaml** file of the project:
 ```yaml
 dependencies:
   camera: 0.10.4
@@ -438,7 +439,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
 ```
 ### Integrating Image Upload
-To allow users to upload images from the gallery, import the &**image_picker** package. Implement the **_pickImage()** method, which utilizes the **ImagePicker** class to select an image from the gallery. Once an image is selected, it can be processed using the **_processImage()** method.
+To allow users to upload images from the gallery, import the **image_picker** package. Implement the **_pickImage()** method, which utilizes the **ImagePicker** class to select an image from the gallery. Once an image is selected, it can be processed using the **_processImage()** method.
 ```dart
 // main.dart
 class _CameraScreenState extends State<CameraScreen> {
@@ -461,7 +462,7 @@ class _CameraScreenState extends State<CameraScreen> {
 }
 ```
 ### Object Recognition with TensorFlow Lite
-To perform object recognition, we'll use the TensorFlow Lite framework. Begin by importing the **tflite** package. In the **_initTensorFlow()** method, load the TensorFlow Lite model and labels from the assets. You can specify the model and label file paths and adjust settings like the number of threads and GPU delegate usage.
+To perform object recognition, we'll use the TensorFlow Lite. Begin by importing the **tflite** package. In the **_initTensorFlow()** method, load the TensorFlow Lite model and labels from the assets. You can specify the model and label file paths and adjust settings like the number of threads and GPU delegate usage.
 ```dart
 // main.dart
 class _CameraScreenState extends State<CameraScreen> {
@@ -547,6 +548,7 @@ Future<void> _processImage(String imagePath) async {
 ```
 ### Building the User Interface
 ```dart
+// main.dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
